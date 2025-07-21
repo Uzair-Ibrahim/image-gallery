@@ -377,34 +377,26 @@
     </div>
 
     <script>
-        // Global variables
         var currentImageIndex = 0;
         var galleryItems = [];
         var filteredImages = [];
 
-        // Initialize when page loads
         function initGallery() {
             galleryItems = document.querySelectorAll('.gallery-item');
             filteredImages = Array.from(galleryItems);
-            
-            // Add keyboard event listener
             document.addEventListener('keydown', handleKeyboard);
             
             console.log('Gallery initialized with', galleryItems.length, 'items');
         }
 
-        // Filter images by category
         function filterImages(category) {
             console.log('Filtering by:', category);
-            
-            // Update active button
             var buttons = document.querySelectorAll('.filter-btn');
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].classList.remove('active');
             }
             event.target.classList.add('active');
 
-            // Filter items
             filteredImages = [];
             for (var i = 0; i < galleryItems.length; i++) {
                 var item = galleryItems[i];
@@ -422,7 +414,6 @@
             console.log('Filtered to', filteredImages.length, 'items');
         }
 
-        // Open lightbox
         function openLightbox(originalIndex) {
             console.log('Opening lightbox for index:', originalIndex);
             
@@ -441,20 +432,17 @@
             console.log('Lightbox opened');
         }
 
-        // Close lightbox
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // Close lightbox when clicking background
         function closeLightboxIfBackground(event) {
             if (event.target.id === 'lightbox') {
                 closeLightbox();
             }
         }
 
-        // Show image in lightbox
         function showImage(index) {
             if (index < 0 || index >= filteredImages.length) return;
 
@@ -470,8 +458,6 @@
 
             currentImageIndex = index;
         }
-
-        // Navigate to previous image
         function previousImage() {
             var newIndex = currentImageIndex - 1;
             if (newIndex >= 0) {
@@ -481,7 +467,6 @@
             }
         }
 
-        // Navigate to next image
         function nextImage() {
             var newIndex = currentImageIndex + 1;
             if (newIndex < filteredImages.length) {
@@ -490,8 +475,6 @@
                 showImage(0);
             }
         }
-
-        // Handle keyboard navigation
         function handleKeyboard(e) {
             var lightbox = document.getElementById('lightbox');
             if (!lightbox.classList.contains('active')) return;
@@ -508,8 +491,6 @@
                     break;
             }
         }
-
-        // Initialize when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initGallery);
         } else {
